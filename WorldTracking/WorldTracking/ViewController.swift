@@ -16,6 +16,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var startingPositionNode: SCNNode?
     var endingPositionNode: SCNNode?
     let cameraRelativePosition = SCNVector3(x: 0, y: 0, z: -0.1)
+    
+    let xLabel = UILabel()
+    let yLabel = UILabel()
+    let zLabel = UILabel()
+    var distanceLabel = UILabel()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +34,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         plusButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         
-        let distanceLabel = UILabel()
+        
         distanceLabel.font = UIFont.boldSystemFont(ofSize: 14)
         distanceLabel.textColor = UIColor.black
         distanceLabel.text = "Distance: "
@@ -38,7 +43,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         distanceLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         distanceLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 
-        let xLabel = UILabel()
+        
         xLabel.font = UIFont.boldSystemFont(ofSize: 14)
         xLabel.textColor = UIColor.red
         xLabel.text = "x: "
@@ -47,7 +52,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         xLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         xLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 6).isActive = true
 
-        let yLabel = UILabel()
+        
         yLabel.font = UIFont.boldSystemFont(ofSize: 14)
         yLabel.textColor = UIColor.green
         yLabel.text = "y: "
@@ -56,7 +61,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         yLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         yLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
 
-        let zLabel = UILabel()
+        
         zLabel.font = UIFont.boldSystemFont(ofSize: 14)
         zLabel.textColor = UIColor.blue
         zLabel.text = "z: "
@@ -163,6 +168,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //removeFloor(named: "floor")
         //let floor = createFloor(anchor: anchorPlane)
         //node.addChildNode(floor)
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        if startingPositionNode != nil && endingPositionNode != nil {
+            return
+        }
+        
+        guard let xDistance = Service.distance3(fromStartingPositionNode: startingPositionNode, onView: sceneView, cameraRelativePosition: cameraRelativePosition)?.x else {return}
+        guard let yDistance = Service.distance3(fromStartingPositionNode: startingPositionNode, onView: sceneView, cameraRelativePosition: cameraRelativePosition)?.y else {return}
+        guard let zDistance = Service.distance3(fromStartingPositionNode: startingPositionNode, onView: sceneView, cameraRelativePosition: cameraRelativePosition)?.z else {return}
+        
+        DispatchQueue.main.async {
+            self.xLabel.text = String(format: "x: %.2f", xDistance) + "m"
+            self.yLabel.text = String(format: "y: %.2f", yDistance) + "m"
+            self.zLabel.text = String(format: "z: %.2f", zDistance) + "m"
+            
+            self.distanceLabel.text = String(format: "Distance: %.2f", Service.distance(x: xDistance, y: yDistance, z: zDistance))
+        }
     }
 
 }
