@@ -13,8 +13,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     let configuration = ARWorldTrackingConfiguration()
     
-    var startingPositionNode = SCNNode()
-    var endingPositionNode = SCNNode()
+    var startingPositionNode: SCNNode?
+    var endingPositionNode: SCNNode?
     let cameraRelativePosition = SCNVector3(x: 0, y: 0, z: -0.1)
         
     override func viewDidLoad() {
@@ -85,6 +85,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func buttonAction(sender: UIButton!) {
         print("Button tapped")
+        handleTap()
 //        addBox()
     }
     
@@ -119,7 +120,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //        }
 //    }
 
-    @objc func handleTap(sender: UITapGestureRecognizer) {
+    @objc func handleTap() { //sender: UITapGestureRecognizer
 //        let tappedView = sender.view as! SCNView
 //        let touchLocation = sender.location(in: tappedView)
 //        let hitTest = tappedView.hitTest(touchLocation, options: nil)
@@ -129,9 +130,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //            let geometry = result.node.geometry
 //            print("Tapped \(String(describing: name)) with geometry: \(String(describing: geometry))")
 //        }
-        let sphere = SCNNode(geometry: SCNSphere(radius: 0.005))
-        sphere.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "silver.jpeg")
-
+        if startingPositionNode != nil && endingPositionNode != nil {
+            startingPositionNode?.removeFromParentNode()
+            endingPositionNode?.removeFromParentNode()
+            startingPositionNode = nil
+            endingPositionNode = nil
+        } else if startingPositionNode != nil && endingPositionNode == nil {
+            let sphere = SCNNode(geometry: SCNSphere(radius: 0.005))
+            sphere.geometry?.firstMaterial?.diffuse.contents = UIColor.purple
+            Service.addChildNode(sphere, toNode: sceneView.scene.rootNode, inView: sceneView, cameraRelativePosition: cameraRelativePosition)
+            endingPositionNode = sphere//add sphere as ending position
+        } else if startingPositionNode == nil && endingPositionNode == nil {
+            let sphere = SCNNode(geometry: SCNSphere(radius: 0.005))
+            sphere.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "silver.jpeg")
+            Service.addChildNode(sphere, toNode: sceneView.scene.rootNode, inView: sceneView, cameraRelativePosition: cameraRelativePosition)
+            startingPositionNode = sphere//add sphere as starting position
+        }
+        
     }
     
     
