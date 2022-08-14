@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A804F022893FB3A000BCB96 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A804F012893FB39000BCB96 /* Service.swift */; };
+		2A804F022893FB3A000BCB96 /* DistanceCalculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A804F012893FB39000BCB96 /* DistanceCalculate.swift */; };
 		2A89FF7E2886BE3B006C0B45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A89FF7D2886BE3B006C0B45 /* AppDelegate.swift */; };
 		2A89FF802886BE3B006C0B45 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A89FF7F2886BE3B006C0B45 /* SceneDelegate.swift */; };
 		2A89FF822886BE3B006C0B45 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A89FF812886BE3B006C0B45 /* ViewController.swift */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2A804F012893FB39000BCB96 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		2A804F012893FB39000BCB96 /* DistanceCalculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceCalculate.swift; sourceTree = "<group>"; };
 		2A89FF7A2886BE3B006C0B45 /* WorldTracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldTracking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A89FF7D2886BE3B006C0B45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A89FF7F2886BE3B006C0B45 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 				2A89FF862886BE3F006C0B45 /* Assets.xcassets */,
 				2A89FF882886BE3F006C0B45 /* LaunchScreen.storyboard */,
 				2A89FF8B2886BE3F006C0B45 /* Info.plist */,
-				2A804F012893FB39000BCB96 /* Service.swift */,
+				2A804F012893FB39000BCB96 /* DistanceCalculate.swift */,
 			);
 			path = WorldTracking;
 			sourceTree = "<group>";
@@ -142,7 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A89FF822886BE3B006C0B45 /* ViewController.swift in Sources */,
-				2A804F022893FB3A000BCB96 /* Service.swift in Sources */,
+				2A804F022893FB3A000BCB96 /* DistanceCalculate.swift in Sources */,
 				2A89FF7E2886BE3B006C0B45 /* AppDelegate.swift in Sources */,
 				2A89FF802886BE3B006C0B45 /* SceneDelegate.swift in Sources */,
 			);

@@ -7,10 +7,10 @@
 
 import UIKit
 import ARKit
-class Service {
+final class DistanceCalculate {
 
-    static func addChildNode(_ node: SCNNode, toNode: SCNNode, inView: ARSCNView, cameraRelativePosition: SCNVector3) {
-        guard let currentFrame = inView.session.currentFrame else {return}
+    func addChild(_ node: SCNNode, to toNode: SCNNode, in inView: ARSCNView, for cameraRelativePosition: SCNVector3) {
+        guard let currentFrame = inView.session.currentFrame else { return }
         let camera = currentFrame.camera
         let transform = camera.transform
         var translationMatrix = matrix_identity_float4x4
@@ -22,9 +22,9 @@ class Service {
         toNode.addChildNode(node)
     }
 
-    static func distance3(fromStartingPositionNode: SCNNode?, onView: ARSCNView, cameraRelativePosition: SCNVector3) -> SCNVector3? {
-        guard let startingPosition = fromStartingPositionNode else {return nil}
-        guard let currentFrame = onView.session.currentFrame else {return nil}
+    func distance3(from fromStartingPositionNode: SCNNode?, on onView: ARSCNView, for cameraRelativePosition: SCNVector3) -> SCNVector3? {
+        guard let startingPosition = fromStartingPositionNode else { return nil }
+        guard let currentFrame = onView.session.currentFrame else { return nil }//TODO: in one
         let camera = currentFrame.camera
         let transform = camera.transform
         var translationMatrix = matrix_identity_float4x4
@@ -38,7 +38,7 @@ class Service {
         return SCNVector3(xDistance, yDistance, zDistance)
     }
     
-    static func distance(x: Float, y: Float, z: Float) -> Float {
+    func distance(x: Float, y: Float, z: Float) -> Float {
         return sqrtf(x*x + y*y + z*z)
     }
 }
